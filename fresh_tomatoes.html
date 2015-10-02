@@ -1,0 +1,306 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Giulio's Favourite Movie Trailers</title>
+    <!-- Bootstrap 3 -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <style type="text/css" media="screen">
+        body {
+            padding-top: 80px;
+        }
+        #trailer .modal-dialog {
+            margin-top: 200px;
+            width: 640px;
+            height: 480px;
+        }
+        .hanging-close {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            z-index: 9001;
+        }
+        #trailer-video {
+            width: 100%;
+            height: 100%;
+        }
+        /* Modified margin and padding */
+        .movie-tile {
+            margin-top: 10px;
+            padding-top: 10px;
+            margin-bottom: 5px;
+            padding-bottom: 5px;
+        }
+        /* Modified h2 font size to display the movie title */
+        .movie-tile h2 {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        /* Additional class to style the movie's year of release */
+        .movie-year {
+            background-color: #282828;
+            font-weight: bold;
+        }
+        /* Additional class to style the storyline of the movie*/
+        .movie-storyline {
+            margin-left: 5px;
+            font-weight: bold;
+            text-align: justify;
+        }
+        /* Styling the storyline content displayed by the popover */
+        .popover-content {
+            font-size: .7em;
+            font-weight: normal;
+            display: -webkit-flex; /* Safari */
+            -webkit-justify-content: space-around; /* Safari 6.1+ */
+            display: flex;
+            justify-content: space-around;
+            text-justify: justify;
+            text-align: justify;
+        }
+        /* Styling the storyline title displayed by the popover */
+        .popover-title {
+            font-weight: bold;
+        }
+        .movie-tile:hover {
+            background-color: #EEE;
+            border: none;
+            cursor: pointer;
+        }
+        .scale-media {
+            padding-bottom: 56.25%;
+            position: relative;
+        }
+        .scale-media iframe {
+            border: none;
+            height: 100%;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            background-color: white;
+        }
+    </style>
+    <script type="text/javascript" charset="utf-8">
+        // Pause the video when the modal is closed
+        $(document).on('click', '.hanging-close, .modal-backdrop, .modal', function (event) {
+            // Remove the src so the player itself gets removed, as this is the only
+            // reliable way to ensure the video stops playing in IE
+            $("#trailer-video-container").empty();
+        });
+        // Start playing the video whenever the trailer modal is opened
+        $(document).on('click', '.movie-tile', function (event) {
+            var trailerYouTubeId = $(this).attr('data-trailer-youtube-id')
+            var sourceUrl = 'http://www.youtube.com/embed/' + trailerYouTubeId + '?autoplay=1&html5=1';
+            $("#trailer-video-container").empty().append($("<iframe></iframe>", {
+              'id': 'trailer-video',
+              'type': 'text-html',
+              'src': sourceUrl,
+              'frameborder': 0
+            }));
+        });
+        // Animate in the movies when the page loads
+        $(document).ready(function () {
+          $('.movie-tile').hide().first().show("fast", function showNext() {
+            $(this).next("div").show("fast", showNext);
+          });
+        });
+        // Additional function to initialise all the popovers containing each
+        // movie's storyline. When the user hovers the pointer over the
+        // "storyline" button the storyline for that movie is displayed
+        $(function () {
+          $('[data-toggle="popover"]').popover()
+        })
+    </script>
+</head>
+
+  <body>
+    <!-- Trailer Video Modal -->
+    <div class="modal" id="trailer">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <a href="#" class="hanging-close" data-dismiss="modal" aria-hidden="true">
+            <img src="https://lh5.ggpht.com/v4-628SilF0HtHuHdu5EzxD7WRqOrrTIDi_MhEG6_qkNtUK5Wg7KPkofp_VJoF7RS2LhxwEFCO1ICHZlc-o_=s0#w=24&h=24"/>
+          </a>
+          <div class="scale-media" id="trailer-video-container">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Main Page Content -->
+    <div class="container">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Giulio's Favourite Movie Trailers</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="w16bYZ-4nmE" data-toggle="modal" data-target="#trailer">
+    <img src="http://ia.media-imdb.com/images/M/MV5BMTY4ODI3Njg5N15BMl5BanBnXkFtZTgwODgyMDUxMDE@._V1__SX1196_SY578_.jpg" width="220" height="342">
+    <h4>
+        <span class="label label-default movie-year">
+            <span class="glyphicon glyphicon-film" aria-hidden="true"></span> 1991
+        </span>
+        <a href="#" tabindex="0" class="btn btn-sm btn-default movie-storyline" role="button" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="A New Orleans DA discovers there's more to the Kennedy                    assassination than the official story." title="JFK">
+            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Storyline
+        </a>
+    </h4>
+    <h2>JFK</h2>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="ZLlV_JVtO5c" data-toggle="modal" data-target="#trailer">
+    <img src="http://ia.media-imdb.com/images/M/MV5BNzE4MTY1MTMyN15BMl5BanBnXkFtZTcwMzk5MzI4OA@@._V1__SX1196_SY578_.jpg" width="220" height="342">
+    <h4>
+        <span class="label label-default movie-year">
+            <span class="glyphicon glyphicon-film" aria-hidden="true"></span> 1979
+        </span>
+        <a href="#" tabindex="0" class="btn btn-sm btn-default movie-storyline" role="button" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="When an alien spacecraft of enormous power is spotted                          approaching Earth, Admiral Kirk resumes command of                          the Starship Enterprise in order to intercept,                          examine and hopefully stop the intruder." title="Star Trek: The Motion Picture">
+            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Storyline
+        </a>
+    </h4>
+    <h2>Star Trek: The Motion Picture</h2>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="N7seUNbY1_w" data-toggle="modal" data-target="#trailer">
+    <img src="http://ia.media-imdb.com/images/M/MV5BMTQwNTc1MDEyMF5BMl5BanBnXkFtZTcwMjUzNjMyMQ@@._V1__SX1196_SY578_.jpg" width="220" height="342">
+    <h4>
+        <span class="label label-default movie-year">
+            <span class="glyphicon glyphicon-film" aria-hidden="true"></span> 1993
+        </span>
+        <a href="#" tabindex="0" class="btn btn-sm btn-default movie-storyline" role="button" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="A law student uncovers a conspiracy, putting                                  herself and others in danger." title="The Pelican Brief">
+            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Storyline
+        </a>
+    </h4>
+    <h2>The Pelican Brief</h2>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="vKQi3bBA1y8" data-toggle="modal" data-target="#trailer">
+    <img src="http://ia.media-imdb.com/images/M/MV5BMTkxNDYxOTA4M15BMl5BanBnXkFtZTgwNTk0NzQxMTE@._V1__SX1196_SY578_.jpg" width="220" height="342">
+    <h4>
+        <span class="label label-default movie-year">
+            <span class="glyphicon glyphicon-film" aria-hidden="true"></span> 1999
+        </span>
+        <a href="#" tabindex="0" class="btn btn-sm btn-default movie-storyline" role="button" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="A computer hacker learns from mysterious rebels about                           the true nature of his reality and his role in the                           war against its controllers." title="The Matrix">
+            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Storyline
+        </a>
+    </h4>
+    <h2>The Matrix</h2>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="CsDwpF3uiZI" data-toggle="modal" data-target="#trailer">
+    <img src="http://ia.media-imdb.com/images/M/MV5BMTQ0MzI1NjYwOF5BMl5BanBnXkFtZTgwODU3NDU2MTE@._V1._CR93,97,1209,1861__SX1196_SY578_.jpg" width="220" height="342">
+    <h4>
+        <span class="label label-default movie-year">
+            <span class="glyphicon glyphicon-film" aria-hidden="true"></span> 1983
+        </span>
+        <a href="#" tabindex="0" class="btn btn-sm btn-default movie-storyline" role="button" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="After rescuing Han Solo from the palace of Jabba the Hutt,                          the rebels attempt to destroy the second Death Star,                          while Luke struggles to make Vader return from the                          dark side of the Force." title="Star Wars: Episode VI - Return of the Jedi">
+            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Storyline
+        </a>
+    </h4>
+    <h2>Star Wars: Episode VI - Return of the Jedi</h2>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="KtEIMC58sZo" data-toggle="modal" data-target="#trailer">
+    <img src="http://ia.media-imdb.com/images/M/MV5BMTI3MTgzODk4Nl5BMl5BanBnXkFtZTYwODQ0NzQ5._V1__SX1196_SY578_.jpg" width="220" height="342">
+    <h4>
+        <span class="label label-default movie-year">
+            <span class="glyphicon glyphicon-film" aria-hidden="true"></span> 1995
+        </span>
+        <a href="#" tabindex="0" class="btn btn-sm btn-default movie-storyline" role="button" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="NASA must devise a strategy to return Apollo 13 to Earth                          safely after the spacecraft undergoes massive                          internal damage putting the lives of the three                          astronauts on board in jeopardy." title="Apollo 13">
+            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Storyline
+        </a>
+    </h4>
+    <h2>Apollo 13</h2>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="2TQ-pOvI6Xo" data-toggle="modal" data-target="#trailer">
+    <img src="http://ia.media-imdb.com/images/M/MV5BMTY4ODM0OTc2M15BMl5BanBnXkFtZTcwNzE0MTk3OA@@._V1__SX1196_SY578_.jpg" width="220" height="342">
+    <h4>
+        <span class="label label-default movie-year">
+            <span class="glyphicon glyphicon-film" aria-hidden="true"></span> 1988
+        </span>
+        <a href="#" tabindex="0" class="btn btn-sm btn-default movie-storyline" role="button" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="John McClane, officer of the NYPD, tries to save wife Holly                          Gennaro and several others, taken hostage by German                          terrorist Hans Gruber during a Christmas party at                          the Nakatomi Plaza in Los Angeles." title="Die Hard">
+            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Storyline
+        </a>
+    </h4>
+    <h2>Die Hard</h2>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="e-QFj59PON4" data-toggle="modal" data-target="#trailer">
+    <img src="http://ia.media-imdb.com/images/M/MV5BNDYyMDgxNDQ5Nl5BMl5BanBnXkFtZTcwMjc1ODg3OA@@._V1__SX1196_SY578_.jpg" width="220" height="342">
+    <h4>
+        <span class="label label-default movie-year">
+            <span class="glyphicon glyphicon-film" aria-hidden="true"></span> 1968
+        </span>
+        <a href="#" tabindex="0" class="btn btn-sm btn-default movie-storyline" role="button" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Humanity finds a mysterious, obviously artificial, object                               buried beneath the Lunar surface and, with the                               intelligent computer H.A.L. 9000, sets off on                               a quest." title="2001: A Space Odyssey">
+            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Storyline
+        </a>
+    </h4>
+    <h2>2001: A Space Odyssey</h2>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="hbqMuvnx5MU" data-toggle="modal" data-target="#trailer">
+    <img src="http://ia.media-imdb.com/images/M/MV5BMTMyMTE3OTk3NF5BMl5BanBnXkFtZTcwOTkwNDc3NA@@._V1__SX1196_SY578_.jpg" width="220" height="342">
+    <h4>
+        <span class="label label-default movie-year">
+            <span class="glyphicon glyphicon-film" aria-hidden="true"></span> 1983
+        </span>
+        <a href="#" tabindex="0" class="btn btn-sm btn-default movie-storyline" role="button" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="A young man finds a back door into a military central                          computer in which reality is confused with                          game-playing, possibly starting World                          War III." title="War Games">
+            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Storyline
+        </a>
+    </h4>
+    <h2>War Games</h2>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="_2GvrAQMNoU" data-toggle="modal" data-target="#trailer">
+    <img src="http://ia.media-imdb.com/images/M/MV5BMjMyMDMzMDg4M15BMl5BanBnXkFtZTgwNDc3ODYxMTE@._V1__SX1196_SY578_.jpg" width="220" height="342">
+    <h4>
+        <span class="label label-default movie-year">
+            <span class="glyphicon glyphicon-film" aria-hidden="true"></span> 2000
+        </span>
+        <a href="#" tabindex="0" class="btn btn-sm btn-default movie-storyline" role="button" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="An unemployed single mother becomes a legal                                assistant and almost single-handedly brings                                down a California power company accused of                                polluting a city's water supply." title="Erin Brockovich">
+            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Storyline
+        </a>
+    </h4>
+    <h2>Erin Brockovich</h2>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="a6JB2suJYHM" data-toggle="modal" data-target="#trailer">
+    <img src="http://ia.media-imdb.com/images/M/MV5BMTQxMTUyODg2OF5BMl5BanBnXkFtZTcwNDM2MjAxNA@@._V1__SX1196_SY578_.jpg" width="220" height="342">
+    <h4>
+        <span class="label label-default movie-year">
+            <span class="glyphicon glyphicon-film" aria-hidden="true"></span> 1989
+        </span>
+        <a href="#" tabindex="0" class="btn btn-sm btn-default movie-storyline" role="button" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="When Dr. Henry Jones Sr. suddenly goes missing                                while pursuing the Holy Grail, eminent                                archaeologist Indiana Jones must follow                                in his father's footsteps and stop                                the Nazis." title="Indiana Jones and the Last Crusade">
+            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Storyline
+        </a>
+    </h4>
+    <h2>Indiana Jones and the Last Crusade</h2>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="iGfk_IU3Wlo" data-toggle="modal" data-target="#trailer">
+    <img src="http://ia.media-imdb.com/images/M/MV5BNzk3OTE2NjQ0OV5BMl5BanBnXkFtZTgwMDg3ODYxMTE@._V1__SX1196_SY578_.jpg" width="220" height="342">
+    <h4>
+        <span class="label label-default movie-year">
+            <span class="glyphicon glyphicon-film" aria-hidden="true"></span> 1990
+        </span>
+        <a href="#" tabindex="0" class="btn btn-sm btn-default movie-storyline" role="button" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="In 1984, the USSR's best submarine captain in                               their newest sub violates orders and heads for                               the USA. Is he trying to defect, or to start                               a war?" title="The Hunt for Red October">
+            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Storyline
+        </a>
+    </h4>
+    <h2>The Hunt for Red October</h2>
+</div>
+
+        </div>
+    </div>
+  </body>
+</html>
